@@ -1,0 +1,85 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : dut
+Version: T-2022.03-SP4
+Date   : Wed Dec  3 03:25:01 2025
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: NangateOpenCellLibrary_PDKv1_2_v2008_10_slow_nldm
+Wire Load Model Mode: top
+
+  Startpoint: mac_unit_inst/mac_buffer/shift_reg_reg[1][8][2]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: mac_unit_inst/colctr/collector_out_reg[0][6]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                 0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  mac_unit_inst/mac_buffer/shift_reg_reg[1][8][2]/CK (DFFR_X2)
+                                                        0.0000 #   0.0000 r
+  mac_unit_inst/mac_buffer/shift_reg_reg[1][8][2]/Q (DFFR_X2)
+                                                        0.7047     0.7047 f
+  U10713/ZN (XNOR2_X2)                                  0.3628     1.0675 r
+  U9189/ZN (NAND2_X4)                                   0.1407     1.2081 f
+  U2728/ZN (INV_X8)                                     0.0949     1.3031 r
+  U2534/ZN (NAND2_X2)                                   0.0570     1.3600 f
+  U3790/ZN (NAND2_X4)                                   0.1006     1.4607 r
+  U6131/ZN (XNOR2_X2)                                   0.2830     1.7437 r
+  U6130/ZN (XNOR2_X2)                                   0.3514     2.0950 r
+  U2420/ZN (NAND2_X2)                                   0.0814     2.1765 f
+  U2449/ZN (NAND2_X2)                                   0.1451     2.3216 r
+  U1908/ZN (XNOR2_X2)                                   0.3440     2.6656 r
+  U1907/ZN (NAND2_X2)                                   0.0842     2.7499 f
+  U1835/ZN (NAND2_X2)                                   0.1614     2.9113 r
+  U1834/ZN (NAND2_X1)                                   0.1035     3.0148 f
+  U7891/ZN (NAND2_X2)                                   0.1394     3.1543 r
+  U8757/ZN (INV_X2)                                     0.0441     3.1983 f
+  U7893/ZN (NAND2_X2)                                   0.0792     3.2775 r
+  U7892/ZN (NAND2_X2)                                   0.0591     3.3366 f
+  U6160/ZN (NAND2_X2)                                   0.1304     3.4671 r
+  U3020/ZN (NAND2_X2)                                   0.0824     3.5494 f
+  U9613/ZN (NAND2_X2)                                   0.0969     3.6463 r
+  U6110/ZN (XNOR2_X2)                                   0.3178     3.9641 r
+  U6108/ZN (NAND2_X1)                                   0.1326     4.0967 f
+  U2882/ZN (NAND3_X2)                                   0.1939     4.2906 r
+  U7012/ZN (XNOR2_X2)                                   0.3066     4.5973 r
+  U11013/ZN (XNOR2_X2)                                  0.3483     4.9456 r
+  U9919/ZN (NOR2_X2)                                    0.1033     5.0489 f
+  U5966/ZN (INV_X2)                                     0.0786     5.1275 r
+  U5967/ZN (NAND3_X2)                                   0.0780     5.2054 f
+  U5974/ZN (NAND3_X2)                                   0.1094     5.3149 r
+  U5969/ZN (NAND3_X2)                                   0.0793     5.3942 f
+  U11101/ZN (NAND3_X2)                                  0.1048     5.4989 r
+  U11099/ZN (NAND2_X2)                                  0.0680     5.5670 f
+  U11106/ZN (NAND2_X2)                                  0.1197     5.6867 r
+  U11105/ZN (NAND2_X4)                                  0.0774     5.7641 f
+  U12441/ZN (OAI21_X1)                                  0.2333     5.9974 r
+  mac_unit_inst/colctr/collector_out_reg[0][6]/D (DFFR_X2)
+                                                        0.0000     5.9974 r
+  data arrival time                                                5.9974
+
+  clock clk (rise edge)                                 4.0000     4.0000
+  clock network delay (ideal)                           0.0000     4.0000
+  clock uncertainty                                    -0.0500     3.9500
+  mac_unit_inst/colctr/collector_out_reg[0][6]/CK (DFFR_X2)
+                                                        0.0000     3.9500 r
+  library setup time                                   -0.3093     3.6407
+  data required time                                               3.6407
+  --------------------------------------------------------------------------
+  data required time                                               3.6407
+  data arrival time                                               -5.9974
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                -2.3567
+
+
+1

@@ -1,0 +1,64 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : dut
+Version: T-2022.03-SP4
+Date   : Wed Dec  3 04:11:33 2025
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: NangateOpenCellLibrary_PDKv1_2_v2008_10_slow_nldm
+Wire Load Model Mode: top
+
+  Startpoint: mac_unit_inst/mac_unit_inst/kernel_reg_reg[1][1][4]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: mac_unit_inst/mac_unit_inst/products_reg_reg[1][1][13]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                 0.0000     0.0000
+  clock network delay (ideal)                           0.0000     0.0000
+  mac_unit_inst/mac_unit_inst/kernel_reg_reg[1][1][4]/CK (DFFR_X2)
+                                                        0.0000 #   0.0000 r
+  mac_unit_inst/mac_unit_inst/kernel_reg_reg[1][1][4]/Q (DFFR_X2)
+                                                        0.7119     0.7119 f
+  U4414/ZN (XNOR2_X2)                                   0.2143     0.9262 r
+  U5160/ZN (NAND2_X2)                                   0.0684     0.9946 f
+  U1933/ZN (NAND2_X1)                                   0.2470     1.2417 r
+  U5158/ZN (INV_X4)                                     0.0669     1.3085 f
+  U9562/ZN (NOR2_X4)                                    0.1845     1.4930 r
+  U10057/ZN (XNOR2_X2)                                  0.2875     1.7805 r
+  U10055/ZN (XNOR2_X2)                                  0.3188     2.0993 r
+  U10767/ZN (NOR2_X2)                                   0.0923     2.1916 f
+  U4799/ZN (NOR2_X2)                                    0.1236     2.3152 r
+  U4632/ZN (NAND2_X2)                                   0.0750     2.3902 f
+  U4631/ZN (NAND3_X2)                                   0.1795     2.5697 r
+  U9109/ZN (NAND3_X1)                                   0.1157     2.6854 f
+  U9687/ZN (NAND2_X2)                                   0.1208     2.8062 r
+  U9751/ZN (XNOR2_X2)                                   0.2637     3.0699 r
+  mac_unit_inst/mac_unit_inst/products_reg_reg[1][1][13]/D (DFFR_X1)
+                                                        0.0000     3.0699 r
+  data arrival time                                                3.0699
+
+  clock clk (rise edge)                                 3.4000     3.4000
+  clock network delay (ideal)                           0.0000     3.4000
+  clock uncertainty                                    -0.0500     3.3500
+  mac_unit_inst/mac_unit_inst/products_reg_reg[1][1][13]/CK (DFFR_X1)
+                                                        0.0000     3.3500 r
+  library setup time                                   -0.2800     3.0700
+  data required time                                               3.0700
+  --------------------------------------------------------------------------
+  data required time                                               3.0700
+  data arrival time                                               -3.0699
+  --------------------------------------------------------------------------
+  slack (MET)                                                      0.0001
+
+
+1
