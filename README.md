@@ -35,54 +35,33 @@ This repository is intended for **technical review by hardware and systems engin
 └── README.md
 
 ```
----
-
-## What This Project Demonstrates
-
-This project demonstrates the following concepts and skills:
-
-- Hardware dataflow design for CNN-style workloads  
-- Sliding-window reuse of input feature maps  
-- SRAM scratchpad buffering to decouple DRAM latency from compute  
-- Pipelined MAC-based convolution  
-- RTL-level control sequencing for multi-stage pipelines  
-- Verification of streaming hardware using module-level testbenches  
 
 ---
 
-## High-Level Dataflow
+## RTL Organization and Dataflow
+<p align="center">
+  <img src="Figures/Top-Level-Dark.png" width="800">
+</p>
 
-At a high level, the accelerator operates as a streaming pipeline:
 
-1. Input feature maps are read from DRAM in aligned bursts  
-2. Data is staged into on-chip SRAM to enable reuse  
-3. A sliding 4×4 window is constructed using shift-register-based buffering  
-4. Window values are fed into a pipelined MAC array for convolution  
-5. Results pass through activation and pooling stages  
-6. Final outputs are written back to memory  
+### DRAM (off-chip)
+External DRAM serves as bulk storage for input feature maps and output results and is accessed through aligned burst transactions.
 
-Once the pipeline is primed, the design is capable of producing continuous outputs without stalling on memory latency.
+### DRAM Interface
+The DRAM interface manages burst-based reads and writes to external memory and presents a streaming data interface to the on-chip logic. It decouples external memory timing from the internal datapath.
 
----
+### SRAM (Scratchpad)
+On-chip SRAM acts as a managed scratchpad to buffer input data and enable reuse across overlapping convolution windows. This reduces repeated DRAM accesses and improves effective bandwidth utilization.
 
-## Pipeline Stages
+### Window Staging & Reuse
+The window staging unit constructs sliding convolution windows from buffered input data and maintains reuse across spatially adjacent windows. It feeds windowed data to the compute pipeline using a refill-and-stream buffering scheme.
 
-The design is organized into the following conceptual stages:
+### Pipelined MAC
+The pipelined MAC datapath performs multiply–accumulate operations over staged convolution windows and represents the critical compute path of the design. The pipeline depth was explored and optimized to balance throughput and area.
 
-### Memory Ingress
-Handles burst reads from DRAM and populates SRAM after undergoing a staging process.  
-This stage isolates compute from variable external memory latency.
+### Controller
+A centralized controller sequences memory transactions, window advancement, and compute progression. Control is distributed internally across multiple FSMs but appears as a single supervisory entity at the architectural level.
 
-### Window Staging and Reuse
-Constructs a 4×4 sliding window over the input feature map.  
-Each input value is reused across multiple MAC operations, significantly reducing memory bandwidth requirements.
-
-### Convolution (MAC Pipeline)
-A pipelined multiply-accumulate datapath performs convolution across the window.  
-Pipeline depth is chosen to balance throughput and timing closure.
-
-### Memory Egress
-Completed outputs are written back to memory using aligned access patterns.
 
 ---
 
@@ -102,30 +81,6 @@ Completed outputs are written back to memory using aligned access patterns.
 - **Options considered:** Batch-style processing vs streaming  
 - **Chosen approach:** Streaming pipeline after initial fill  
 - **Rationale:** Maximizes hardware utilization and simplifies steady-state control  
-
----
-
-## Control Strategy
-
-The pipeline is coordinated by a centralized controller responsible for:
-- Sequencing DRAM burst reads and writebacks  
-- Managing SRAM read/write phases  
-- Advancing the sliding window  
-- Ensuring correct pipeline priming and draining  
-
-Control logic is intentionally separated from the datapath to simplify verification and future extension.
-
----
-
-## Verification and Testing
-
-Correctness was validated using:
-- Module-level RTL testbenches  
-- Directed test cases for window staging and accumulation  
-- Boundary-condition testing at image edges  
-- Consistency checks on output feature maps  
-
-Testing focused on validating **dataflow correctness and control sequencing** rather than ML accuracy metrics.
 
 ---
 
