@@ -129,14 +129,15 @@ Testing focused on validating **dataflow correctness and control sequencing** ra
 These limitations were accepted to keep the design analyzable and verifiable.
 
 ---
-
 ## Repository Structure
+```markdown
+├── Results – Timing and Cell reports from synthesization
+├── Vivado-Testing – Module-level source code and tailored testbenches
+├── projectFall2025.v3 – Provided project structure
+├── dut_rtl – RTL scripts for all levels of pipelining
+└── README.md
 
-/Results – Timing and Cell reports from synthesization
-/Vivado-Testing – Module-level source code and tailored testbenches
-/dut_rtl – RTL scripts for all levels of pipelining
-/projectFall2025.v3 – Provided project structure. Includes input and expected output files, synthesis configuration, and high-level testbenches. This can be used directly with QuestaSim and Synopsys for RTL and synthesization. 
-
+```
 ---
 
 ## Future Work
